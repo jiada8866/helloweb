@@ -2,17 +2,16 @@ package main
 
 import (
 	"fmt"
-	"github.com/jiada8866/echo-logrus"
+	"github.com/jiada8866/helloweb/app/route"
+	"github.com/jiada8866/helloweb/app/route/middleware/echologrus"
+	"github.com/jiada8866/helloweb/app/shared/logger"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 	"github.com/labstack/echo/middleware"
 	"os"
-	"route"
-	"shared/logger"
 )
 
 var logpath string = "/tmp/log/helloweb.log"
-var timeFormat string = "2006-01-02 15:04:05"
 
 func main() {
 	logfile, err := os.Create(logpath)
@@ -25,7 +24,7 @@ func main() {
 
 	e := echo.New()
 
-	e.Use(echologrus.NewWithTimeFormat(timeFormat))
+	e.Use(echologrus.New())
 	e.Use(middleware.Recover())
 
 	route.AddRouters(e)

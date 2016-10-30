@@ -1,8 +1,8 @@
 package logger
 
 import (
-	"github.com/Abramovic/logrus_influxdb"
 	log "github.com/Sirupsen/logrus"
+	"github.com/jiada8866/logrus_influxdb"
 	"os"
 	"time"
 )
@@ -32,18 +32,17 @@ func Init(logfile *os.File) {
 		UseHTTPS:    false,
 		Measurement: "helloweb",
 		Precision:   "ns",
-		//Tags:          []string{"server"},
+		Tags:        []string{"server", "api", "type"},
+		//当启动程序后，BatchInterval内没有打日志，在BatchInterval间隔后触发写influxDB会触发空指针的panic
+		//因为此时hook.batchP==nil
 		BatchInterval: (5 * time.Second),
-		//TODO BatchCount设置成非零会报错？！
-		BatchCount: 0, // set to "0" to disable batching
+		BatchCount:    200, // set to "0" to disable batching
 	}
 
 	/*
 	  Use nil if you want to use the default configurations
-
 	  hook, err := logrus_influxdb.NewInfluxDB(nil)
 	*/
-
 	hook, err := logrus_influxdb.NewInfluxDB(config)
 	if err != nil {
 		log.Error(err)

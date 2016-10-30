@@ -1,7 +1,7 @@
 package route
 
 import (
-	"controller"
+	"github.com/jiada8866/helloweb/app/controller"
 	"github.com/labstack/echo"
 )
 
