@@ -7,6 +7,8 @@ import (
 
 func AddRouters(e *echo.Echo) {
 	e.GET("/", controller.Hello)
+	e.GET("/one", controller.One)
+	e.GET("/two", controller.Two)
 
 	e.POST("/post", controller.GetPostData)
 
