@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/labstack/echo"
 )
 
@@ -10,8 +11,10 @@ type TestPost struct {
 }
 
 func GetPostData(c echo.Context) error {
+
 	tp := new(TestPost)
 	if err := c.Bind(tp); err != nil {
+		fmt.Println(err)
 		return err
 	}
 

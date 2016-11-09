@@ -20,7 +20,7 @@ func main() {
 		return
 	}
 	defer logfile.Close()
-	logger.Init(logfile)
+	logger.Init(logfile, false)
 
 	e := echo.New()
 

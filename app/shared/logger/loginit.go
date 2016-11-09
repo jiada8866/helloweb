@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-func Init(logfile *os.File) {
+func Init(logfile *os.File, send bool) {
 	// use logrotate.NewFile when log rated by logrotate
 	//logfile,err:=logrotate.NewFile(logpath)
 
@@ -25,6 +25,12 @@ func Init(logfile *os.File) {
 
 	log.SetOutput(logfile)
 
+	if send {
+		sendToInfluxDB()
+	}
+}
+
+func sendToInfluxDB() {
 	config := &logrus_influxdb.Config{
 		Host:        "localhost",
 		Port:        8086,

@@ -5,8 +5,11 @@ package echologrus
 import (
 	"time"
 
+	"bytes"
+	"fmt"
 	"github.com/Sirupsen/logrus"
 	"github.com/labstack/echo"
+	"io/ioutil"
 	"net/http"
 	"os"
 )
@@ -17,12 +20,20 @@ func New() echo.MiddlewareFunc {
 }
 
 // Another variant for better performance.
-// With single log entry and time format.
+// With single log entry.
 func NewWithLogger(l *logrus.Logger) echo.MiddlewareFunc {
 	return func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
 			start := time.Now()
 			isError := false
+
+			body := c.Request().Body()
+			dataIn, _ := ioutil.ReadAll(body)
+			if len(dataIn) > 0 {
+				fmt.Println("data in:", string(dataIn))
+			}
+
+			c.Request().SetBody(bytes.NewReader(dataIn))
 
 			if err := next(c); err != nil {
 				c.Error(err)
@@ -33,6 +44,7 @@ func NewWithLogger(l *logrus.Logger) echo.MiddlewareFunc {
 
 			host, _ := os.Hostname()
 
+			// TODO 完善access日志的field
 			entry := l.WithFields(logrus.Fields{
 				"type":    "access",
 				"server":  host,
