@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"bytes"
-	"fmt"
 	"github.com/Sirupsen/logrus"
 	"github.com/labstack/echo"
 	"io/ioutil"
@@ -30,10 +29,8 @@ func NewWithLogger(l *logrus.Logger) echo.MiddlewareFunc {
 			body := c.Request().Body()
 			dataIn, _ := ioutil.ReadAll(body)
 			if len(dataIn) > 0 {
-				fmt.Println("data in:", string(dataIn))
+				c.Request().SetBody(bytes.NewReader(dataIn))
 			}
-
-			c.Request().SetBody(bytes.NewReader(dataIn))
 
 			if err := next(c); err != nil {
 				c.Error(err)

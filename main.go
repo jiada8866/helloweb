@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/NYTimes/logrotate"
 	log "github.com/Sirupsen/logrus"
 	"github.com/jiada8866/helloweb/app/route"
 	"github.com/jiada8866/helloweb/app/route/middleware/echologrus"
@@ -9,19 +10,25 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 	"github.com/labstack/echo/middleware"
-	"os"
 )
 
 var logpath string = "/tmp/log/helloweb.log"
 
 func main() {
-	logfile, err := os.Create(logpath)
+	//logfile, err := os.Create(logpath)
+	//if err != nil {
+	//	fmt.Println(err)
+	//	return
+	//}
+	//defer logfile.Close()
+
+	// use logrotate.NewFile when log rated by logrotate
+	logfile, err := logrotate.NewFile(logpath)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	defer logfile.Close()
-	logger.Init(logfile, false)
+	logger.Init(logfile, true)
 
 	e := echo.New()
 
@@ -43,5 +50,9 @@ func main() {
 
 	route.AddRouters(e)
 
+	log.WithFields(log.Fields{
+		"type": "start",
+		"addr": ":1323",
+	}).Info("server is running")
 	e.Run(standard.New(":1323"))
 }

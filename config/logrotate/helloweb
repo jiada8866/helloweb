@@ -1,0 +1,13 @@
+# logrotate config of helloweb
+# rotate every hour, and keep for 7 days
+/tmp/log/helloweb.log {
+	hourly
+	maxage 7
+	#size 2M
+	#rotate 3
+	missingok
+	sharedscripts
+	postrotate
+		killall -SIGHUP helloweb
+	endscript
+}

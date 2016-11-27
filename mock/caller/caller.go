@@ -163,7 +163,7 @@ func main() {
 		go doStatistics(key, c, rotateChan, exitChan)
 	}
 
-	time.Sleep(time.Second * 10)
+	time.Sleep(time.Second * 120)
 	exitChan <- true
 	// TODO 等待各个goroutine结束
 }

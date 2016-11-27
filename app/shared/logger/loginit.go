@@ -3,14 +3,11 @@ package logger
 import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/jiada8866/logrus_influxdb"
-	"os"
+	"io"
 	"time"
 )
 
-func Init(logfile *os.File, send bool) {
-	// use logrotate.NewFile when log rated by logrotate
-	//logfile,err:=logrotate.NewFile(logpath)
-
+func Init(logfile io.Writer, send bool) {
 	/*
 		logfile, err := os.Create(logpath)
 		if err != nil {
@@ -23,6 +20,7 @@ func Init(logfile *os.File, send bool) {
 		defer logfile.Close()
 	*/
 
+	// TODO 区分环境，往不同的output输出日志
 	log.SetOutput(logfile)
 
 	if send {
