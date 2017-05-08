@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/parnurzeal/gorequest"
 	"math/rand"
 	"time"
+
+	"github.com/parnurzeal/gorequest"
 )
 
 type caller struct {

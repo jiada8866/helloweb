@@ -3,14 +3,14 @@
 package echologrus
 
 import (
-	"time"
-
 	"bytes"
-	"github.com/Sirupsen/logrus"
-	"github.com/labstack/echo"
 	"io/ioutil"
 	"net/http"
 	"os"
+	"time"
+
+	"github.com/Sirupsen/logrus"
+	"github.com/labstack/echo"
 )
 
 // New returns a new middleware handler with a default name and logger

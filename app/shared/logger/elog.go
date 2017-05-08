@@ -2,13 +2,14 @@ package logger
 
 import (
 	"encoding/json"
+	"io"
+
 	"github.com/Sirupsen/logrus"
 	"github.com/labstack/gommon/log"
-	"io"
 )
 
 type Elog struct {
-	prefix     string
+	prefix string
 
 	*logrus.Logger
 }

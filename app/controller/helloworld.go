@@ -1,11 +1,12 @@
 package controller
 
 import (
-	log "github.com/Sirupsen/logrus"
-	"github.com/labstack/echo"
 	"math/rand"
 	"net/http"
 	"time"
+
+	log "github.com/Sirupsen/logrus"
+	"github.com/labstack/echo"
 )
 
 func Hello(c echo.Context) error {
