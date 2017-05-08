@@ -3,7 +3,7 @@ package route
 import (
 	"fmt"
 
-	"github.com/jiada8866/helloweb/app/controller"
+	"github.com/jiadas/helloweb/app/controller"
 	"github.com/labstack/echo"
 )
 

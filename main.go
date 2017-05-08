@@ -5,9 +5,9 @@ import (
 
 	"github.com/NYTimes/logrotate"
 	log "github.com/Sirupsen/logrus"
-	"github.com/jiada8866/helloweb/app/route"
-	"github.com/jiada8866/helloweb/app/route/middleware/echologrus"
-	"github.com/jiada8866/helloweb/app/shared/logger"
+	"github.com/jiadas/helloweb/app/route"
+	"github.com/jiadas/helloweb/app/route/middleware/echologrus"
+	"github.com/jiadas/helloweb/app/shared/logger"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 )

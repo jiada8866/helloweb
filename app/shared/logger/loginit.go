@@ -5,7 +5,7 @@ import (
 	"time"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/jiada8866/logrus_influxdb"
+	"github.com/jiadas/logrus_influxdb"
 )
 
 func Init(logfile io.Writer, send bool) {
