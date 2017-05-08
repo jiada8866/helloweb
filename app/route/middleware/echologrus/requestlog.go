@@ -26,10 +26,10 @@ func NewWithLogger(l *logrus.Logger) echo.MiddlewareFunc {
 			start := time.Now()
 			isError := false
 
-			body := c.Request().Body()
+			body := c.Request().Body
 			dataIn, _ := ioutil.ReadAll(body)
 			if len(dataIn) > 0 {
-				c.Request().SetBody(bytes.NewReader(dataIn))
+				c.Request().Body = ioutil.NopCloser(bytes.NewReader(dataIn))
 			}
 
 			if err := next(c); err != nil {
@@ -45,19 +45,20 @@ func NewWithLogger(l *logrus.Logger) echo.MiddlewareFunc {
 			entry := l.WithFields(logrus.Fields{
 				"type":    "access",
 				"server":  host,
-				"method":  c.Request().Method(),
-				"ip":      c.Request().RemoteAddress(),
-				"status":  c.Response().Status(),
+				"method":  c.Request().Method,
+				"ip":      c.Request().RemoteAddr,
+				"status":  c.Response().Status,
 				"latency": latency.Nanoseconds() / int64(time.Millisecond),
+				"body":    string(dataIn),
 			})
 
-			if c.Response().Status() != http.StatusNotFound {
-				entry = entry.WithField("api", c.Request().URI())
+			if c.Response().Status != http.StatusNotFound {
+				entry = entry.WithField("api", c.Request().URL)
 			} else {
-				entry = entry.WithField("illegal_api", c.Request().URI())
+				entry = entry.WithField("illegal_api", c.Request().URL)
 			}
 
-			if reqID := c.Request().Header().Get("X-Request-Id"); reqID != "" {
+			if reqID := c.Request().Header.Get("X-Request-Id"); reqID != "" {
 				entry = entry.WithField("request_id", reqID)
 			}
 

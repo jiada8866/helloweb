@@ -13,6 +13,8 @@ func AddRouters(e *echo.Echo) {
 
 	e.POST("/post", controller.GetPostData)
 
+	e.POST("/alert", controller.Alert)
+
 	// test echo group
 	groupTest(e)
 }

@@ -8,14 +8,32 @@ import (
 )
 
 type Elog struct {
+	prefix     string
+
 	*logrus.Logger
 }
 
-func (e *Elog) SetOutput(w io.Writer) {
-	e.Out = w
+func (el *Elog) Output() io.Writer {
+	return el.Out
 }
 
-func (e *Elog) SetLevel(l log.Lvl) {
+func (el *Elog) SetOutput(w io.Writer) {
+	el.Out = w
+}
+
+func (el *Elog) Prefix() string {
+	return el.prefix
+}
+
+func (el *Elog) SetPrefix(p string) {
+	el.prefix = p
+}
+
+func (el *Elog) Level() log.Lvl {
+	return log.Lvl(el.Logger.Level)
+}
+
+func (el *Elog) SetLevel(l log.Lvl) {
 	var level logrus.Level = logrus.InfoLevel
 	switch l {
 	case log.DEBUG:
@@ -29,33 +47,37 @@ func (e *Elog) SetLevel(l log.Lvl) {
 	case log.OFF:
 		level = logrus.FatalLevel
 	}
-	e.Level = level
+	el.Logger.Level = level
 }
 
-func (e *Elog) Printj(j log.JSON) {
+func (el *Elog) Printj(j log.JSON) {
 
 }
 
-func (e *Elog) Debugj(j log.JSON) {
+func (el *Elog) Debugj(j log.JSON) {
 	b, err := json.Marshal(j)
 	if err != nil {
-		e.Fatal(err)
+		el.Fatal(err)
 	}
-	e.Debug(string(b))
+	el.Debug(string(b))
 }
 
-func (e *Elog) Infoj(j log.JSON) {
-
-}
-
-func (e *Elog) Warnj(j log.JSON) {
+func (el *Elog) Infoj(j log.JSON) {
 
 }
 
-func (e *Elog) Errorj(j log.JSON) {
+func (el *Elog) Warnj(j log.JSON) {
 
 }
 
-func (e *Elog) Fatalj(j log.JSON) {
+func (el *Elog) Errorj(j log.JSON) {
+
+}
+
+func (el *Elog) Fatalj(j log.JSON) {
+
+}
+
+func (el *Elog) Panicj(j log.JSON) {
 
 }
