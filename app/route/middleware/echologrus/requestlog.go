@@ -50,6 +50,7 @@ func NewWithLogger(l *logrus.Logger) echo.MiddlewareFunc {
 				"status":  c.Response().Status,
 				"latency": latency.Nanoseconds() / int64(time.Millisecond),
 				"body":    string(dataIn),
+				"route":   c.Path(),
 			})
 
 			if c.Response().Status != http.StatusNotFound {
