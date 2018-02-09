@@ -4,7 +4,8 @@ import (
 	"io"
 	"time"
 
-	log "github.com/Sirupsen/logrus"
+	log "github.com/sirupsen/logrus"
+
 	"github.com/jiadas/logrus_influxdb"
 )
 

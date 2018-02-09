@@ -9,8 +9,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/labstack/echo"
+	"github.com/sirupsen/logrus"
 )
 
 // New returns a new middleware handler with a default name and logger

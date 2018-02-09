@@ -4,24 +4,18 @@ import (
 	"fmt"
 
 	"github.com/NYTimes/logrotate"
-	log "github.com/Sirupsen/logrus"
-	"github.com/jiadas/helloweb/app/route"
-	"github.com/jiadas/helloweb/app/route/middleware/echologrus"
-	"github.com/jiadas/helloweb/app/shared/logger"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
+	log "github.com/sirupsen/logrus"
+
+	"github.com/jiadas/helloweb/internal/app/helloweb/route"
+	"github.com/jiadas/helloweb/pkg/shared/logger"
+	"github.com/jiadas/helloweb/pkg/shared/middleware/echologrus"
 )
 
 var logpath string = "/tmp/log/helloweb.log"
 
 func main() {
-	//logfile, err := os.Create(logpath)
-	//if err != nil {
-	//	fmt.Println(err)
-	//	return
-	//}
-	//defer logfile.Close()
-
 	// use logrotate.NewFile when log rated by logrotate
 	logfile, err := logrotate.NewFile(logpath)
 	if err != nil {

@@ -1,0 +1,1 @@
+尝试 https://github.com/golang-standards/project-layout 中提议的代码组织结构，感觉这种组织结构确实比较适合有多个binaries(multiple application binaries)的大项目，小项目分这么目录反而繁琐了。

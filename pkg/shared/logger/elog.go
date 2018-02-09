@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"io"
 
-	"github.com/Sirupsen/logrus"
 	"github.com/labstack/gommon/log"
+	"github.com/sirupsen/logrus"
 )
 
 type Elog struct {
@@ -35,7 +35,7 @@ func (el *Elog) Level() log.Lvl {
 }
 
 func (el *Elog) SetLevel(l log.Lvl) {
-	var level logrus.Level = logrus.InfoLevel
+	var level = logrus.InfoLevel
 	switch l {
 	case log.DEBUG:
 		level = logrus.DebugLevel
