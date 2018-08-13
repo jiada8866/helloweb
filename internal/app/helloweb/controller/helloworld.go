@@ -10,21 +10,14 @@ import (
 )
 
 func Hello(c echo.Context) error {
-
-	randomErr()
-
 	return c.String(http.StatusOK, "Hello, World!")
 }
 
 func One(c echo.Context) error {
-
-	randomErr()
-
 	return c.String(http.StatusOK, "One")
 }
 
 func Two(c echo.Context) error {
-
 	randomErr()
 
 	return c.String(http.StatusOK, "Two")

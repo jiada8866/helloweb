@@ -54,9 +54,9 @@ func NewWithLogger(l *logrus.Logger) echo.MiddlewareFunc {
 			})
 
 			if c.Response().Status != http.StatusNotFound {
-				entry = entry.WithField("api", c.Request().URL)
+				entry = entry.WithField("url", c.Request().URL)
 			} else {
-				entry = entry.WithField("illegal_api", c.Request().URL)
+				entry = entry.WithField("illegalURL", c.Request().URL)
 			}
 
 			if reqID := c.Request().Header.Get("X-Request-Id"); reqID != "" {

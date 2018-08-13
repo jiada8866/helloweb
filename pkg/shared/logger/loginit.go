@@ -4,9 +4,8 @@ import (
 	"io"
 	"time"
 
-	log "github.com/sirupsen/logrus"
-
 	"github.com/jiadas/logrus_influxdb"
+	log "github.com/sirupsen/logrus"
 )
 
 func Init(logfile io.Writer, send bool) {
@@ -41,7 +40,7 @@ func sendToInfluxDB() {
 		Tags:        []string{"server", "api", "type"},
 		//当启动程序后，BatchInterval内没有打日志，在BatchInterval间隔后触发写influxDB会触发空指针的panic
 		//因为此时hook.batchP==nil
-		BatchInterval: (5 * time.Second),
+		BatchInterval: 5 * time.Second,
 		BatchCount:    200, // set to "0" to disable batching
 	}
 
