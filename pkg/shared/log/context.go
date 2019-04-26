@@ -15,11 +15,7 @@ var (
 	G = GetLogger
 
 	// L is an alias for the the standard logger.
-	// 直接使用 logrus.NewEntry 在 context 里没有 loggerKey 对应的 logger 时，
-	// 都是直接返回的 L，绕过了 logrus 内置的 pool
-	// L = logrus.NewEntry(logrus.StandardLogger())
-	// 使用 WithFields 是想充分利用 logrus 里的 pool
-	L = logrus.WithFields(logrus.Fields{})
+	L = logrus.NewEntry(logrus.StandardLogger())
 )
 
 type (
