@@ -6,6 +6,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// https://github.com/containerd/containerd/blob/master/log/context.go
 var (
 	// G is an alias for GetLogger.
 	//
